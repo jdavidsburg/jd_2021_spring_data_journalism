@@ -33,21 +33,7 @@ library(lubridate)
 
 ## Load and Cleaning Data
 
-Our data set comes from the Washington Post's collection of more than 52,000 criminal homicides over the past decade in 50 of the largest American cities. 
-Each row is a homicide victim. 
-
-* uid | unique id for each homicide victim
-* reported_date | numeric | date homicide was reported
-* victim_last | character | last name of victim
-* victim_first | character | first name of victim
-* victim_race | character | race of victim
-* victim_age | numeric | age of victim
-* victim_sex | character | sex of victim
-* city | character | name of city
-* state | character | two letter state code 
-* lat | numeric | latitude of homicide
-* lon | numeric | longitude of homicide
-* disposition | character | status of homicide case
+[In this block of text, describe the source of the data, and write a basic data dictionary for data you are working with]
 
 ```{r}
 # Load required data
@@ -69,7 +55,7 @@ In this notebook, we are reverse engineering five sentences from the story.
 ```{r}
 # Put code to reverse engineer sentence here
 
-#Check to see how many days in the last three years have had homicides.
+#Check to see how many days had 0 homicides
 homicide_by_date <- homicide_data %>%
   filter(city == "Baltimore") %>%
   filter(reported_date >= 20150101) %>%
@@ -106,52 +92,15 @@ arrest_rate_2017
 
 ```
 
-
 ### Sentence 2
-* **Sentence text**: Of 50 of the nation’s largest cities, Baltimore is one of 34 where police now make homicide arrests less often than in 2014, according to a Washington Post analysis. In Chicago, the homicide arrest rate has dropped 21 percentage points, in Boston it has dropped 12 points and in St. Louis it is down 9.
+
+* **Sentence text**: [Paste in sentence to engineer here]
 * **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
 
-
 ```{r}
+# Put code to reverse engineer sentence here
 
-# calculate number of arrests in 2014
-total_homicide_2014 <- homicide_data %>%
-  select(reported_date, city, state, disposition) %>%
-  filter(reported_date %in% 20140101:20141231) %>%
-  group_by(city) %>%
-  summarise(total_cases_2014=n())
-total_homicide_2017 <- homicide_data %>%
-  select(reported_date, city, state, disposition) %>%
-  filter(reported_date %in% 20170101:20171231) %>%
-  group_by(city) %>%
-  summarise(total_cases_2017=n())
-homicide_arrest_2014 <- homicide_data %>%
-  select(reported_date, city, state, disposition) %>%
-  filter(reported_date %in% 20140101:20141231) %>%
-  group_by(city) %>%
-  count(arrests = disposition == "Closed by arrest") %>%
-  filter(arrests == TRUE)
-homicide_arrest_2017 <- homicide_data %>%
-  select(reported_date, city, state, disposition) %>%
-  filter(reported_date %in% 20170101:20171231) %>%
-  group_by(city) %>%
-  count(arrests = disposition == "Closed by arrest") %>%
-  filter(arrests == TRUE)
-# join data sets
-homicide_arrest_rate_2014 <- homicide_arrest_2014 %>%
-  inner_join(total_homicide_2014) %>%
-  mutate(arrest_rate_2014 = (n/total_cases_2014*100)) %>%
-  select(city, arrest_rate_2014)
-homicide_arrest_rate_2017 <- homicide_arrest_2017 %>%
-  inner_join(total_homicide_2017) %>%
-  mutate(arrest_rate_2017 = (n/total_cases_2017*100)) %>%
-  select(city, arrest_rate_2017)
-homicide_arrest_change_2014_2017 <- homicide_arrest_rate_2017 %>%
-  full_join(homicide_arrest_rate_2014) %>%
-  mutate(arrest_rate_change=arrest_rate_2017-arrest_rate_2014) %>%
-  arrange(arrest_rate_change)
-# display change in arrest from 2014 to 2017
-homicide_arrest_change_2014_2017
+# Display results of code below this codeblock
 
 ```
 
