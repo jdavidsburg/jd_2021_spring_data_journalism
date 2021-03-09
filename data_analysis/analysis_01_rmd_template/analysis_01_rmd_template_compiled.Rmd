@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis 01 Template"
-author: "Josh Davidsburg, Brittany N. Gaddy"
+author: "Josh Davidsburg, Brittany N. Gaddy, Julia Arbutus"
 date: "3/2/2021"
 output:
   html_document:
