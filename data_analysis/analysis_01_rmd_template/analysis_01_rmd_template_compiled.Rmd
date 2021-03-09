@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis 01 Template"
-author: "Josh Davidsburg, Brittany N. Gaddy, Julia Arbutus"
+author: "Josh Davidsburg, Brittany N. Gaddy, Julia Arbutus, Ashkan Motamedi"
 date: "3/2/2021"
 output:
   html_document:
@@ -155,15 +155,31 @@ homicide_arrest_change_2014_2017
 
 ```
 
-### Sentence 3
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+
+
+### Sentence 3
+* **Sentence text**: [Baltimore is also one of 30 cities that have seen an increase in homicides in recent years, with the greatest raw number increase in killings of any city other than Chicago, which has four times the population. While homicide rates remain near historical lows in most American cities, Baltimore and Chicago are now both seeing murder tallies that rival the early 2000s.]
+* **Analysis summary**: In running the data I found that 2014 was the year Baltimore lead Chicago 236 to 129. However, I was unable to confirm the findings of this data as only 25 states saw an increase in homicides in 2014. No year ran the required 30 as mentioned in the story 2014 was the closest with 25 when subtracted by 2017.
+
 
 ```{r}
 # Put code to reverse engineer sentence here
-
-# Display results of code below this codeblock
+total_homicide_2014 <- homicide_data %>%
+  select(reported_date, city, state, disposition) %>%
+  filter(reported_date %in% 20140101:20141231) %>%
+  group_by(city) %>%
+  summarise(total_cases_2014=n())
+total_homicide_2017 <- homicide_data %>%
+  select(reported_date, city, state, disposition) %>%
+  filter(reported_date %in% 20170101:20171231) %>%
+  group_by(city) %>%
+  summarise(total_cases_2017=n())
+total_homicide_arrest_<- total_homicide_2014 %>%
+  inner_join(total_homicide_2017) %>%
+  mutate(increase_in_homicides_2014  =  total_cases_2017 - total_cases_2014) %>%
+  select(city,increase_in_homicides_2014) %>%
+  arrange(desc(increase_in_homicides_2014))
 
 ```
 
