@@ -97,7 +97,7 @@ glimpse(opioid_scrape)
 # view it
 opioid_scrape
 
-# What flaws did you see?
+# What flaws did you see? The numbers are listed as strings.There's an N/A row. One row has information pertaining to an asterisck that appears in other rows. Columns are poorly named.
 
 ```
 
@@ -110,8 +110,7 @@ See if you picked out everything I did.
 ```{r}
 # Video A 
 # Click play to run the codeblock and the video will display in the markdown document. 
-embed_youtube("gD687oB8jiU", width = "100%", height="480", frameborder = 0,
-allowfullscreen = FALSE, query = NULL)
+embed_url("https://youtu.be/gD687oB8jiU")
 
 # If the video doesn't work here, load this URL in your browser: 
 # https://youtu.be/gD687oB8jiU
@@ -172,8 +171,9 @@ Now, it's your turn to use rename() to fix the opioid prescription rate column, 
 ```{r}
 opioid_scrape_clean <- opioid_scrape %>%
   clean_names() %>%
-  rename(opioid_death_rate = opioid_involved_overdose_deaths_100_000_persons1_2018) 
+  rename(opioid_death_rate = opioid_involved_overdose_deaths_100_000_persons1_2018) %>% 
   # Add an additional rename() function here as instructed
+  rename(opioid_prescription_rate = opioid_prescriptions_100_persons2_2018)
 
 opioid_scrape_clean
 
@@ -184,8 +184,7 @@ opioid_scrape_clean
 ```{r}
 # Video B 
 # Click play to run the codeblock and the video will display in the markdown document. 
-embed_youtube("ZC67K4LLGDY", width = "100%", height="480", frameborder = 0,
-allowfullscreen = FALSE, query = NULL)
+embed_url("https://youtu.be/ZC67K4LLGDY")
 
 # If the video doesn't work here, load this URL in your browser: 
 # https://youtu.be/ZC67K4LLGDY
@@ -237,8 +236,7 @@ opioid_scrape_clean
 ```{r}
 # Video C 
 # Click play to run the codeblock and the video will display in the markdown document. 
-embed_youtube("x4r_Nq0RKkk", width = "100%", height="480", frameborder = 0,
-allowfullscreen = FALSE, query = NULL)
+embed_url("https://youtu.be/x4r_Nq0RKkk")
 
 # If the video doesn't work here, load this URL in your browser: 
 # https://youtu.be/x4r_Nq0RKkk
@@ -275,8 +273,7 @@ opioid_scrape_clean
 ```{r}
 # Video D
 # Click play to run the codeblock and the video will display in the markdown document. 
-embed_youtube("E3NUaUY5y5s", width = "100%", height="480", frameborder = 0,
-allowfullscreen = FALSE, query = NULL)
+embed_url("https://youtu.be/E3NUaUY5y5s")
 
 # If the video doesn't work here, load this URL in your browser: 
 # https://youtu.be/E3NUaUY5y5s
@@ -346,8 +343,8 @@ opioid_scrape_clean <- opioid_scrape %>%
   remove_empty() %>%
   filter(state != "*Not included - Did not meet inclusion criteria") %>%
   mutate(opioid_death_rate = na_if(opioid_death_rate,"*")) %>%
-  mutate(opioid_prescription_rate = as.numeric(opioid_prescription_rate)) 
-  # Add an additional function here as instructed
+  mutate(opioid_prescription_rate = as.numeric(opioid_prescription_rate)) %>% 
+  mutate(opioid_death_rate = as.numeric(opioid_death_rate))
 
 
 opioid_scrape_clean
@@ -359,8 +356,7 @@ opioid_scrape_clean
 ```{r}
 # Video E 
 # Click play to run the codeblock and the video will display in the markdown document. 
-embed_youtube("bm9PqSARhcs", width = "100%", height="480", frameborder = 0,
-allowfullscreen = FALSE, query = NULL)
+embed_url("https://youtu.be/bm9PqSARhcs")
 
 # If the video doesn't work here, load this URL in your browser: 
 # https://youtu.be/bm9PqSARhcs
